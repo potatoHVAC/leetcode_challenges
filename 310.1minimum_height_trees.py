@@ -1,7 +1,8 @@
 # Minimum Height Tree
 # https://leetcode.com/problems/minimum-height-trees/submissions/
 # Almost completed on 4/24
-# This is a solution but it is brute force and times out for larger inputs
+#
+# This is a solution but it is brute force and times out for larger inputs.
 
 class Node:
     def __init__(self, label):
@@ -12,6 +13,7 @@ class Node:
         self.connections.append(node)
 
     def check_height(self, previous_node = False):
+        # Recursively find tree height by breadth first search 
         if previous_node and len(self.connections) <= 1:
             return 0
         else:
@@ -22,6 +24,7 @@ class Tree:
         self.nodes = [ Node(i) for i in range(n) ]
 
     def add_edges(self, edges):
+        # Add connections A to B and B to A (doubly linked connection)
         for edge in edges:
             start_node = self.nodes[edge[0]]
             end_node = self.nodes[edge[1]]
