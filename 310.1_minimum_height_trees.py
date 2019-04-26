@@ -24,7 +24,9 @@ class Tree:
         self.nodes = [ Node(i) for i in range(n) ]
 
     def add_edges(self, edges):
-        # Add connections A to B and B to A (doubly linked connection)
+        '''
+        input: list of [int, int] -- List of connections used for populating node relationships
+        '''
         for edge in edges:
             start_node = self.nodes[edge[0]]
             end_node = self.nodes[edge[1]]
@@ -33,6 +35,9 @@ class Tree:
             end_node.add_connection(start_node)
 
     def solve_mht(self):
+        '''
+        output: list of ints -- list of labels that indicate nodes for the minimum height trees
+        '''
         if len(self.nodes) == 1:
             return [0]
         else:
