@@ -2,7 +2,6 @@
 # https://leetcode.com/problems/minimum-size-subarray-sum/
 # Completed 4/28/19
 
-
 def min_subarray(arr, target):
     '''
     input:  arr    -> list[int] 
