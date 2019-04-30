@@ -3,6 +3,6 @@
 # Completed 4/28/19
 
 class Solution:
-    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    def intersection(self, nums1: [int], nums2: [int]) -> [int]:
         return list(set(nums1) & set(nums2))
         

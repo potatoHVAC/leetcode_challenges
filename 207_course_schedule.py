@@ -14,40 +14,35 @@ class Node:
     def add_child(self, node):
         self.children.append(node)
         
-    def is_leaf(self):
-        '''
-        output: bool -> True if node is a leaf
-        '''
+    def is_leaf(self) -> bool:
+        # Return True if node is a leaf
         return len(self.prerequisites) == 0
 
     def remove_leaf_from_children(self):
-        # Removes pointers to this leaf that is stored on nodes that require this class
+        # Remove pointers to this leaf that is stored on dependent nodes
         for child in self.children:
             child.prerequisites.remove(self)
         
 class Tree:
-    def __init__(self, n):
-        self.nodes = [ Node(i) for i in range(n) ]
+    def __init__(self, node_count: int):
+        self.nodes = [ Node(i) for i in range(node_count) ]
 
-    def add_edges(self, edges):
-        '''
-        input: list of [int, int] -- List of connections used for populating node relationships
-        '''
+    def add_edges(self, edges: [[int, int]]):
+        # List of integer pairs used to population node connections
         for edge in edges:
             current_class = self.nodes[edge[0]]
             prerequisit_class = self.nodes[edge[1]]
             current_class.add_prerequisite(prerequisit_class)
             prerequisit_class.add_child(current_class)
+            
+        return self
 
-    def remove_leaf_from_tree(self, leaf):
+    def remove_leaf_from_tree(self, leaf: Node):
         self.nodes.remove(leaf)
             
-    def prune_leaves(self):
-        '''
-        output: bool -> False if tree has no leaves
-
-        Removes any node that is a leaf of the tree and removes their reference from connected node
-        '''
+    def prune_leaves(self) -> bool:
+        # Remove all leaves and their references from tree.
+        # Return True if leaves were removed and False otherwise.
         leaves = [ node for node in self.nodes if node.is_leaf() ]
         if len(leaves) == 0: return False
         
@@ -56,15 +51,12 @@ class Tree:
             self.remove_leaf_from_tree(leaf)
         return True
 
-    def solve_mht(self):
-        '''
-        output: list of ints -- list of labels that indicate nodes for the minimum height trees
-        '''
+    def reduce_tree(self) -> [int]:
+        # Return a list of cyclical nodes if they exist
         while self.prune_leaves(): pass
         return len(self.nodes) == 0
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        schedule = Tree(numCourses)
-        schedule.add_edges(prerequisites)
-        return schedule.solve_mht()
+    def canFinish(self, numCourses: int, prerequisites: [[int]]) -> bool:
+        return Tree(numCourses).add_edges(prerequisites).reduce_tree()
+

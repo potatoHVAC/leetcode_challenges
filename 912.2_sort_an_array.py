@@ -1,18 +1,20 @@
 # Sort an Array
 # https://leetcode.com/problems/sort-an-array/
-#
+# Completed 4/30/19
 # Quick Sort
-from random import randint
-
-def quick_sort(nums):
-    if not nums: return nums
-    pivot = randint(0, len(nums) - 1)
-
-    smaller = [ num for num in nums if num < nums[pivot] ]
-    same = [ num for num in nums if num == nums[pivot] ]
-    larger = [ num for num in nums if num > nums[pivot] ]
-    return quick_sort(smaller) + same + quick_sort(larger) 
     
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
-        return quick_sort(nums)
+    def sortArray(self, numbers: [int]) -> [int]:
+        return self.quick_sort(numbers)
+
+    def quick_sort(self, numbers: [int]) -> [int]:
+        # Return sorted array of numbers
+        if not numbers: return numbers
+        pivot = len(numbers) // 2
+        
+        return (
+            self.quick_sort([ num for num in numbers if num < numbers[pivot] ]) +\
+            [ num for num in numbers if num == numbers[pivot] ] +\
+            self.quick_sort([ num for num in numbers if num > numbers[pivot] ])
+        )
+

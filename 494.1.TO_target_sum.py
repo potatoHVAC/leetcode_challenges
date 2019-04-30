@@ -6,6 +6,7 @@
 class Solution:
     def findTargetSumWays(self, nums: [int], target: int, num_sum: int = 0, pointer: int = 0) -> int:
         if self.target_not_in_range(nums, target, num_sum, pointer):
+            # Return 0 because this brance is not in range of the target
             return 0
         if pointer == len(nums) and num_sum == target:
             return 1
@@ -15,10 +16,10 @@ class Solution:
             self.findTargetSumWays(nums, target, num_sum - nums[pointer], pointer + 1)
         ])
                 
-    def target_not_in_range(self, nums: [int], target: int, num_sum: int, pointer: int):
+    def target_not_in_range(self, nums: [int], target: int, num_sum: int, pointer: int) -> bool:
+        # Return True if the target is in the window of current sum +- remaining sum 
         remaining_sum = sum(nums[pointer:])
         range_min = num_sum - remaining_sum
         range_max = num_sum + remaining_sum + 1
         return target not in range(range_min, range_max)
-
 
