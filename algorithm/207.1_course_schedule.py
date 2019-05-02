@@ -3,31 +3,34 @@
 # Completed 4/26/19
 
 class Node:
-    def __init__(self, label):
+    def __init__(self, label: int):
         self.label = label
         self.prerequisites = []
         self.children = []
 
-    def add_prerequisite(self, node):
+    def add_prerequisite(self, node: 'Node') -> 'self':
         self.prerequisites.append(node)
+        return self
 
-    def add_child(self, node):
+    def add_child(self, node: 'Node') -> 'self':
         self.children.append(node)
+        return self
         
     def is_leaf(self) -> bool:
         # Return True if node is a leaf
         return len(self.prerequisites) == 0
 
-    def remove_leaf_from_children(self):
+    def remove_leaf_from_children(self) -> 'self':
         # Remove pointers to this leaf that is stored on dependent nodes
         for child in self.children:
             child.prerequisites.remove(self)
+        return self
         
 class Tree:
     def __init__(self, node_count: int):
         self.nodes = [ Node(i) for i in range(node_count) ]
 
-    def add_edges(self, edges: [[int, int]]):
+    def add_edges(self, edges: [[int, int]]) -> 'self':
         # List of integer pairs used to population node connections
         for edge in edges:
             current_class = self.nodes[edge[0]]
@@ -37,8 +40,9 @@ class Tree:
             
         return self
 
-    def remove_leaf_from_tree(self, leaf: Node):
+    def remove_leaf_from_tree(self, leaf: Node) -> 'self':
         self.nodes.remove(leaf)
+        return self
             
     def prune_leaves(self) -> bool:
         # Remove all leaves and their references from tree.
