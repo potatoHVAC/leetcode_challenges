@@ -16,11 +16,12 @@ class Solution:
         return self.compare_paths(lower_path, higher_path)
 
     def find_path(self, root: 'TreeNode', target: 'TreeNode') -> ['TreeNode']:
+        # Recursively find the path to target node
         def _find_path(root: 'TreeNode', target: 'TreeNode', path: ['TreeNode']) -> ['TreeNode']:
             path.append(root)
             if root == target:
                 return path
-        
+
             if root.val > target.val:
                 return _find_path(root.left, target, path)
             else:
@@ -29,7 +30,11 @@ class Solution:
         return _find_path(root, target, [])
 
     def compare_paths(self, lower_path: ['TreeNode'], higher_path: ['TreeNode']) -> 'TreeNode':
+        # Find the largest index where 'lower_path[index] == higher_path[index]'
         for i, node in enumerate(lower_path):
+            # If the ith nodes dont match, return the previous node
             if node != higher_path[i]: return higher_path[i - 1]
+            # If higher_path is out of nodes, return its last node
             if i + 1 == len(higher_path): return node
+        # If lower_path is out of nodes, return its last node
         return lower_path[-1]
