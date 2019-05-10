@@ -1,3 +1,5 @@
+# This helper class is used in unit testing BST problems
+
 class TreeNode:
     def __init__(self, val):
         self.val = val
@@ -9,6 +11,7 @@ class Tree:
         self.root = None
 
     def insert(self, val: int) -> 'self':
+        # Insert new value into tree
         if self.root is None:
             self.root = TreeNode(val)
             return self
@@ -24,7 +27,14 @@ class Tree:
         _insert(val, self.root)
         return self
 
+    def insert_array(self, values: [int]) -> 'self':
+        # Insert list of values into tree
+        for value in values:
+            if value: self.insert(value)
+        return self
+
     def show(self) -> [int]:
+        # Return a list of node values in level order
         values = []
         def _show(node: TreeNode, height = 0) -> [int]:
             while len(values) <= height:
@@ -40,3 +50,13 @@ class Tree:
         _show(self.root)
         return [ val for sublist in values for val in sublist ]
 
+    def find_node(self, target: int) -> TreeNode:
+        # Return the node containint target value
+        def _find_node(target: int, node: TreeNode) -> TreeNode:
+            if node is None: return None
+
+            if node.val > target: return _find_node(target, node.left)
+            elif node.val < target: return _find_node(target, node.right)
+            else: return node
+
+        return _find_node(target, self.root)

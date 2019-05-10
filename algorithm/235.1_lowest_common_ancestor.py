@@ -9,6 +9,12 @@
 #         self.left = None
 #         self.right = None
 
+''' Approach
+1 Create find_path that traverses the tree and finds path to a given node.
+2 Find the path to higher and lower bounds. 
+3 Iterate through path index and return the last node with matching value.
+'''
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', low: 'TreeNode', high: 'TreeNode') -> 'TreeNode':
         lower_path = self.find_path(root, low)
@@ -38,3 +44,41 @@ class Solution:
             if i + 1 == len(higher_path): return node
         # If lower_path is out of nodes, return its last node
         return lower_path[-1]
+
+#-------------------------------------------------------------------------------
+
+import unittest
+from tree_class import *
+
+class TestSolution(unittest.TestCase):
+
+    def test_2_node_tree(self):
+        tree = Tree().insert_array([1, 2])
+        self.assertEqual(Solution().lowestCommonAncestor(
+            tree.root,
+            tree.find_node(1),
+            tree.find_node(2)
+        ).val, 1)
+    def test_3_node_tree(self):
+        tree = Tree().insert_array([2, 1, 3])
+        self.assertEqual(Solution().lowestCommonAncestor(
+            tree.root,
+            tree.find_node(1),
+            tree.find_node(3)
+        ).val, 2)
+    def test_9_node_tree(self):
+        tree = Tree().insert_array([6,2,8,0,4,7,9,None,None,3,5])
+        self.assertEqual(Solution().lowestCommonAncestor(
+            tree.root,
+            tree.find_node(2),
+            tree.find_node(8)
+        ).val, 6)
+    def test_9_node_tree_with_lower_input_as_ancestor(self):
+        tree = Tree().insert_array([6,2,8,0,4,7,9,None,None,3,5])
+        self.assertEqual(Solution().lowestCommonAncestor(
+            tree.root,
+            tree.find_node(2),
+            tree.find_node(4)
+        ).val, 2)
+
+unittest.main()
