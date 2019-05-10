@@ -2,6 +2,13 @@
 # https://leetcode.com/problems/course-schedule/
 # Completed 4/26/19
 
+''' Approach
+1. Create a doubly linked graph.
+2. Remove leaf nodes from tree and delete their references in parent nodes.
+3. Repeat 2 untill tree is empty or no more leaves exist.
+4. Return True if tree is empty.
+'''
+
 class Node:
     def __init__(self, label: int):
         self.label = label
@@ -64,3 +71,20 @@ class Solution:
     def canFinish(self, numCourses: int, prerequisites: [[int]]) -> bool:
         return Tree(numCourses).add_edges(prerequisites).reduce_tree()
 
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_canFinish_2_pass(self):
+        tree = Tree(2).add_edges([[0,1]])
+        self.assertTrue(tree.reduce_tree())
+    def test_canFinish_4_pass(self):
+        tree = Tree(4).add_edges([[0,1], [0,2], [0,3]])
+        self.assertTrue(tree.reduce_tree())
+    def test_canFinish_2_fail(self):
+        tree = Tree(2).add_edges([[0,1],[1,0]])
+        self.assertFalse(tree.reduce_tree())
+        
+unittest.main()

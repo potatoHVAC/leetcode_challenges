@@ -1,6 +1,7 @@
 # Smallest String Starting From Leaf
 # https://leetcode.com/problems/smallest-string-starting-from-leaf/
 # Completed 5/6/19
+# I added dynamic 
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -10,6 +11,7 @@
 #         self.right = None
 
 def to_letter(node: TreeNode) -> str:
+    # Return the letter equivalent of node.val
     letters = "abcdefghijklmnopqrstuvwxyz"
     return letters[node.val]
 

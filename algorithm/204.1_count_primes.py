@@ -16,3 +16,22 @@ class Solution:
                     target += i
 
         return sum(primes_bool)
+
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_countPrimes_1(self):
+        self.assertEqual(Solution().countPrimes(1), 0)
+    def test_countPrimes_2(self):
+        self.assertEqual(Solution().countPrimes(2), 0)
+    def test_countPrimes_0(self):
+        self.assertEqual(Solution().countPrimes(0), 0)
+    def test_countPrimes_10(self):
+        self.assertEqual(Solution().countPrimes(10), 4)
+    def test_countPrimes_1(self):
+        self.assertEqual(Solution().countPrimes(100), 25)        
+        
+unittest.main()
