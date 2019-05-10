@@ -53,3 +53,62 @@ class Solution:
             return True
         return False
 
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_findMedianSortedArrays_two_each_mixed(self):
+        nums1 = [1, 3]
+        nums2 = [2, 4]
+        answer = 2.5
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_two_each_middle(self):
+        nums1 = [1, 3]
+        nums2 = [2, 2]
+        answer = 2.0
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_two_each_small_large(self):
+        nums1 = [1, 3]
+        nums2 = [5, 6]
+        answer = 4.0
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_one_each(self):
+        nums1 = [1]
+        nums2 = [2]
+        answer = 1.5
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_one_large_one_small(self):
+        nums1 = [1]
+        nums2 = [2, 3, 4, 5, 6]
+        answer = 3.5
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_two_large(self):
+        nums1 = [1, 2, 3, 4]
+        nums2 = [5, 6, 7, 8]
+        answer = 4.5
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+    def test_findMedianSortedArrays_one_in_middle(self):
+        nums1 = [5]
+        nums2 = [1, 2, 8, 9]
+        answer = 5.0
+        self.assertEqual(Solution().findMedianSortedArrays(nums1, nums2), answer)
+
+    def test_median_even_length(self):
+        self.assertEqual(Solution().median([1, 2]), 1.5)
+    def test_median_odd_length(self):
+        self.assertEqual(Solution().median([1, 2, 3]), 2.0)
+    def test_median_length_1(self):
+        self.assertEqual(Solution().median([1]), 1.0)
+
+    def test_end_recursion_false(self):
+        self.assertFalse(Solution().end_recursion(1,4,1,4))
+    def test_end_recursion_empty_lower(self):
+        self.assertTrue(Solution().end_recursion(1,1,1,4))
+    def test_end_recursion_empty_upper(self):
+        self.assertTrue(Solution().end_recursion(1,4,1,1))
+    def test_end_recursion_two_left(self):
+        self.assertTrue(Solution().end_recursion(1,2,1,2))
+
+unittest.main()

@@ -49,3 +49,27 @@ class Solution:
         heaters.sort()
         return Neighborhood(houses, heaters).find_heater_radius()
     
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_findRadius_1to1_small_heater(self):
+        self.assertEqual(Solution().findRadius([1], [1]), 0)
+    def test_findRadius_2to2_small_heater(self):
+        self.assertEqual(Solution().findRadius([1, 5], [1, 5]), 0)
+    def test_findRadius_1to1_large_heater(self):
+        self.assertEqual(Solution().findRadius([1], [50]), 49)
+    def test_findRadius_2to2_large_heater(self):
+        self.assertEqual(Solution().findRadius([1, 100], [50, 51]), 49)
+    def test_findRadius_heaters_outside_houses(self):
+        self.assertEqual(Solution().findRadius([2, 3], [1, 4]), 1)
+    def test_findRadius_heaters_before_houses(self):
+        self.assertEqual(Solution().findRadius([3, 4], [1]), 3)
+    def test_findRadius_example_1(self):
+        self.assertEqual(Solution().findRadius([1, 2, 3], [2]), 1)
+    def test_findRadius_example_2(self):
+        self.assertEqual(Solution().findRadius([1, 2, 3, 4], [1, 4]), 1)
+
+unittest.main()

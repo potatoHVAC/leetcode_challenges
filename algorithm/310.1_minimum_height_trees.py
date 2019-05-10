@@ -34,7 +34,7 @@ class Tree:
 
         return self
 
-    def remove_leaf_from_tree(self, leaf: Node) -> self:
+    def remove_leaf_from_tree(self, leaf: Node) -> 'self':
         self.nodes.remove(leaf)
         return self
             
@@ -44,14 +44,39 @@ class Tree:
         for leaf in leaves:
             leaf.remove_leaf_from_connection()
             self.remove_leaf_from_tree(leaf)
-        reeturn self
+        return self
 
     def reduce_tree(self) -> [int]:
         # Return a list of the last one or two node labels that would be the roots of a minimum height tree
         while len(self.nodes) > 2: self.prune_leaves()
-        return [ node.label for node in self.nodes ]
+        return sorted([ node.label for node in self.nodes ])
 
 class Solution:
     def findMinHeightTrees(self, node_count: int, edges: [[int]]) -> [int]:
         return Tree(node_count).add_edges(edges).reduce_tree()
 
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_findMinheightTrees_4_nodes(self):
+        n = 4
+        edges = [[1, 0], [1, 2], [1, 3]]
+        self.assertEqual(Solution().findMinHeightTrees(n, edges), [1])
+    def test_findMinheightTrees_1_node(self):
+        n = 1
+        edges = []
+        self.assertEqual(Solution().findMinHeightTrees(n, edges), [0])
+    def test_findMinheightTrees_2_nodes(self):
+        n = 2
+        edges = [[1, 0]]
+        self.assertEqual(Solution().findMinHeightTrees(n, edges), [0, 1])
+    def test_findMinheightTrees_6_nodes(self):
+        n = 6
+        edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
+        self.assertEqual(Solution().findMinHeightTrees(n, edges), [3, 4])
+        
+
+unittest.main()

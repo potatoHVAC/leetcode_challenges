@@ -23,3 +23,49 @@ class Solution:
         range_max = num_sum + remaining_sum + 1
         return target not in range(range_min, range_max)
 
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_findTargetSumWays_1(self):
+        nums = [1]
+        target = 1
+        answer = 1
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_1_negative(self):
+        nums = [1]
+        target = -1
+        answer = 1
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_2(self):
+        nums = [1, 1]
+        target = 0
+        answer = 2
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_3(self):
+        nums = [1, 1, 1, 1, 1]
+        target = 3
+        answer = 5
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_4(self):
+        nums = [1, 2, 3]
+        target = 0
+        answer = 2
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+        
+    def test_target_not_in_range_True(self):
+        nums = [5, 1, 2]
+        target = 5
+        num_sum = 0
+        pointer = 1
+        self.assertTrue(Solution().target_not_in_range(nums, target, num_sum, pointer))
+    def test_target_not_in_range_False(self):
+        nums = [5, 1, 2]
+        target = 5
+        num_sum = 0
+        pointer = 0
+        self.assertFalse(Solution().target_not_in_range(nums, target, num_sum, pointer))
+
+unittest.main()

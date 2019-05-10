@@ -29,3 +29,37 @@ class Solution:
 
     def findTargetSumWays(self, numbers: [int], target: int) -> int:
         return self.ingest_numbers(numbers).get_target_count(target)
+
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_findTargetSumWays_1(self):
+        nums = [1]
+        target = 1
+        answer = 1
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_1_negative(self):
+        nums = [1]
+        target = -1
+        answer = 1
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_2(self):
+        nums = [1, 1]
+        target = 0
+        answer = 2
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_3(self):
+        nums = [1, 1, 1, 1, 1]
+        target = 3
+        answer = 5
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+    def test_findTargetSumWays_4(self):
+        nums = [1, 2, 3]
+        target = 0
+        answer = 2
+        self.assertEqual(Solution().findTargetSumWays(nums, target), answer)
+
+unittest.main()

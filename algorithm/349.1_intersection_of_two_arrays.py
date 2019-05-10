@@ -16,7 +16,7 @@ class Solution:
         numbers = {}
         for num in array:
             if num in numbers: numbers[num] += 1
-            else: numbers[num] = 0
+            else: numbers[num] = 1
 
         return numbers
 
@@ -25,3 +25,53 @@ class Solution:
         for num in array:
             if num in dictionary: intersect.add(num)
         return list(intersect)
+
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_count_elements_in_4_nums(self):
+        array = [1, 2, 2, 4]
+        answer = {1:1, 2:2, 4:1}
+        self.assertEqual(Solution().count_elements_in(array), answer)
+        
+    def test_compare_array_to_dict_match_one(self):
+        input_array = [1, 2]
+        input_dict = {1:1, 3:3}
+        answer = [1]
+        self.assertEqual(Solution().compare_array_to_dict(input_array, input_dict), answer)
+    def test_compare_array_to_dict_match_none(self):
+        input_array = [1, 2]
+        input_dict = {4:1, 3:3}
+        answer = []
+        self.assertEqual(Solution().compare_array_to_dict(input_array, input_dict), answer)
+    def test_compare_array_to_dict_match_all(self):
+        input_array = [1, 2]
+        input_dict = {1:1, 2:1}
+        answer = [1, 2]
+        self.assertEqual(Solution().compare_array_to_dict(input_array, input_dict), answer)
+
+    def test_intersection_match_none(self):
+        array1 = [1, 2]
+        array2 = [3, 4]
+        answer = []
+        self.assertEqual(Solution().intersection(array1, array2), answer)
+    def test_intersection_match_one(self):
+        array1 = [1, 2]
+        array2 = [2, 4]
+        answer = [2]
+        self.assertEqual(Solution().intersection(array1, array2), answer)
+    def test_intersection_match_all(self):
+        array1 = [1, 2]
+        array2 = [1, 2]
+        answer = [1, 2]
+        self.assertEqual(Solution().intersection(array1, array2), answer)
+    def test_intersection_match_many(self):
+        array1 = [1, 2, 3, 6, 3, 2, 1, 3, 5]
+        array2 = [3, 4, 7, 3, 2, 5]
+        answer = [2, 3, 5]
+        self.assertEqual(Solution().intersection(array1, array2), answer)
+        
+unittest.main()
