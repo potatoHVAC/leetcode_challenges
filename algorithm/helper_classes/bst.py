@@ -1,12 +1,8 @@
-# This helper class is used in unit testing BST problems
+# BST for unit testing
 
-class TreeNode:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None        
-
-class Tree:
+from helper_classes.tree_node import *
+        
+class BST:
     def __init__(self):
         self.root = None
 

@@ -48,33 +48,33 @@ class Solution:
 #-------------------------------------------------------------------------------
 
 import unittest
-from tree_class import *
+from helper_classes.bst import *
 
 class TestSolution(unittest.TestCase):
 
     def test_2_node_tree(self):
-        tree = Tree().insert_array([1, 2])
+        tree = BST().insert_array([1, 2])
         self.assertEqual(Solution().lowestCommonAncestor(
             tree.root,
             tree.find_node(1),
             tree.find_node(2)
         ).val, 1)
     def test_3_node_tree(self):
-        tree = Tree().insert_array([2, 1, 3])
+        tree = BST().insert_array([2, 1, 3])
         self.assertEqual(Solution().lowestCommonAncestor(
             tree.root,
             tree.find_node(1),
             tree.find_node(3)
         ).val, 2)
     def test_9_node_tree(self):
-        tree = Tree().insert_array([6,2,8,0,4,7,9,None,None,3,5])
+        tree = BST().insert_array([6,2,8,0,4,7,9,None,None,3,5])
         self.assertEqual(Solution().lowestCommonAncestor(
             tree.root,
             tree.find_node(2),
             tree.find_node(8)
         ).val, 6)
     def test_9_node_tree_with_lower_input_as_ancestor(self):
-        tree = Tree().insert_array([6,2,8,0,4,7,9,None,None,3,5])
+        tree = BST().insert_array([6,2,8,0,4,7,9,None,None,3,5])
         self.assertEqual(Solution().lowestCommonAncestor(
             tree.root,
             tree.find_node(2),
