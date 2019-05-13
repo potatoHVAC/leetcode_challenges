@@ -23,5 +23,22 @@ class Currency:
         return counting_up[target]
 
 class Solution:
-    def change(self, target: int, coins: List[int]) -> int:
+    def change(self, target: int, coins: [int]) -> int:
         return Currency(coins).change_permutations(target)
+
+#-------------------------------------------------------------------------------
+
+import unittest
+
+class TestSolution(unittest.TestCase):
+
+    def test_change_simple(self):
+        self.assertEqual(Solution().change(1, [1]), 1)
+    def test_change_zero(self):
+        self.assertEqual(Solution().change(1, [2]), 0)
+    def test_change_two(self):
+        self.assertEqual(Solution().change(3, [1,2]), 2)
+    def test_change_5_125(self):
+        self.assertEqual(Solution().change(5, [1,2,5]), 4)
+
+unittest.main()
