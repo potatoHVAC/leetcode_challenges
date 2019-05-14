@@ -4,6 +4,14 @@
 
 class Solution:
     def countPrimes(self, number: int) -> int:
+        """Count the number of primes below the target integer.
+
+        Input:
+        :number: int -- check all numbers below target
+
+        Output:
+        int -- number of primes below :number:
+        """
         if number < 2: return 0
 
         primes_bool = [False] * 2 + [True] * (number - 2)

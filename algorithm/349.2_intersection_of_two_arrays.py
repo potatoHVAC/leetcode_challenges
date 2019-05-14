@@ -2,8 +2,22 @@
 # https://leetcode.com/problems/intersection-of-two-arrays/
 # Completed 4/28/19
 
+"""Approach
+1. Convert lists into sets.
+2. Compare sets to eachother.
+"""
+
 class Solution:
     def intersection(self, nums1: [int], nums2: [int]) -> [int]:
+        """Find all elements that exist in both input lists.
+
+        Input:
+        :nums1: [int] -- list of elements
+        :nums2: [int] -- list of elements
+
+        Output:
+        [int] -- list of all ementes that exist in :nums1: and :nums2:
+        """        
         return list(set(nums1) & set(nums2))
         
 #-------------------------------------------------------------------------------

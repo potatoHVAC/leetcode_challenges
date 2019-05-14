@@ -10,6 +10,15 @@
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        """Remove the node that is n places from the end of linked list.
+
+        Input:
+        :head: ListNode -- first node of the linked list
+        :n:    int      -- target node index to be removed
+
+        Output:
+        ListNode -- head of the new linked list. None if list is now empty.
+        """
         target = head
         last_node = head
 

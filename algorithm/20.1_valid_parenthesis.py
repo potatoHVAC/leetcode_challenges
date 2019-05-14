@@ -6,6 +6,14 @@ import re
 
 class Solution:
     def isValid(self, sequence: str) -> bool:
+        """Check if a sequence of () [] {} is valid.
+
+        Input:
+        :sequence: str -- only contains () {} []
+
+        Output:
+        True -- if sequence is valid
+        """
         # Return True if sequence is empty
         #        False if nothing removed from sequence
         new_sequence = re.sub('({}|\(\)|\[\])', '', sequence)

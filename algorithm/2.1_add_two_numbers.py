@@ -19,7 +19,15 @@ class Solution:
             carryover: int = 0,
             last_node: ListNode = None
     ) -> ListNode:
-        # Return root node of summed link list
+        """Return the sum of two numbers. Numbers are stored in linked list in reverse order.
+        
+        Input:
+        :list1: ListNode -- root node to first number's linked list
+        :list2: ListNode -- root node to second number's linked list
+
+        Output:
+        ListNode -- root node to sum of input numbers.
+        """
         current_sum = self.node_sum(list1, list2, carryover)
         if not last_node:
             next_node = ListNode(current_sum % 10)
@@ -35,6 +43,7 @@ class Solution:
         return next_node
 
     def node_sum(self, list1: ListNode, list2: ListNode, carryover: int) -> int:
+        """Return sum of input nodes and carryover"""
         total = carryover
         if list1: total += list1.val
         if list2: total += list2.val

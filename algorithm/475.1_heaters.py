@@ -9,15 +9,15 @@ class Neighborhood:
         self.heater_radius = 0
 
     def get_required_range(self, house_pointer: int, heater_pointer: int) -> int:
-        # Return distance from house to heater given their pointers
+        """Return distance between house and heater."""
         return abs(self.houses[house_pointer] - self.heaters[heater_pointer])
         
     def more_heaters_exist(self, heater_pointer: int) -> bool:
-        # Return True if heater pointer does not point at last heater
+        """Return True if more heaters exist"""
         return heater_pointer < len(self.heaters) - 1
 
     def update_heater_radius(self, house_pointer: int, heater_pointer: int):
-        # Updates the minimum required distance for full heater coverage.
+        """Update the minimum required distance given the input house and heater"""
         if self.more_heaters_exist(heater_pointer):
             required_range = min(
                 self.get_required_range(house_pointer, heater_pointer),
@@ -29,7 +29,7 @@ class Neighborhood:
         self.heater_radius = max(self.heater_radius, required_range)
 
     def find_heater_radius(self, house_pointer: int = 0, heater_pointer: int = 0) -> int:
-        # Return minimum heater radius
+        """Find the minimum required heater radius using recursion"""
         if house_pointer == len(self.houses):
             return self.heater_radius
 
@@ -45,6 +45,15 @@ class Neighborhood:
         
 class Solution:
     def findRadius(self, houses: [int], heaters: [int]) -> int:
+        """Return the minimum required radius to cover all houses with heaters.
+
+        Input:
+        :houses:  [int] -- list of integers representing house locations
+        :heaters: [int] -- list of integers representing heater locations
+
+        Output:
+        int -- value of the minimum required heater radius to cover all houses
+        """
         houses.sort()
         heaters.sort()
         return Neighborhood(houses, heaters).find_heater_radius()

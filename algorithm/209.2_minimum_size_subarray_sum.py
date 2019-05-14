@@ -1,9 +1,19 @@
 # Minimum Size Subarray Sum
 # https://leetcode.com/problems/minimum-size-subarray-sum/
 # Completed 4/28/19
+# I wanted to compare a while loop to my recursive solution in 209.1
 
 class Solution:
     def minSubArrayLen(self, target: int, numbers: [int]) -> int:
+        """Find lenght of minimum sub array with the sum less than a target integer.
+
+        Input:
+        :target:  int   -- sub array's sum must be less than :target:
+        :numbers: [int] -- list of integers to find sub array
+
+        Output:
+        int -- length of shortest sub array in :numbers: with sum less than :target:
+        """
         if sum(numbers) < target: return 0
 
         left, right = 0, 0

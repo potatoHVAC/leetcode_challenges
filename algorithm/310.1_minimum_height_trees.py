@@ -12,11 +12,11 @@ class Node:
         return self
 
     def is_leaf(self) -> bool:
-        # Return True if node is a leaf
+        """Return True if node is a leaf."""
         return len(self.connections) == 1
 
     def remove_leaf_from_connection(self) -> 'self':
-        # Remove pointers to this leaf that is stored on other node
+        """Remove all references to this node on connected nodes."""
         self.connections[0].connections.remove(self)
         return self
         
@@ -25,7 +25,11 @@ class Tree:
         self.nodes = [ Node(i) for i in range(node_count) ]
 
     def add_edges(self, edges: [[int, int]]) -> 'self':
-        # List of integer pairs used to population node connections
+        """Add connections to nodes based on input edges.
+        
+        Input:
+        :edges: [[int]] -- list of sets of integers that define two nodes relationship
+        """
         for edge in edges:
             start_node = self.nodes[edge[0]]
             end_node = self.nodes[edge[1]]
@@ -35,11 +39,12 @@ class Tree:
         return self
 
     def remove_leaf_from_tree(self, leaf: Node) -> 'self':
+        """Remove node from tree."""
         self.nodes.remove(leaf)
         return self
             
     def prune_leaves(self) -> 'self':
-        # Remove any node that is a leaf of the tree and removes their reference from connected node
+        """Locate all current leaves and remove them from tree exposing new leaves."""
         leaves = [ node for node in self.nodes if node.is_leaf() ]
         for leaf in leaves:
             leaf.remove_leaf_from_connection()
@@ -47,12 +52,26 @@ class Tree:
         return self
 
     def reduce_tree(self) -> [int]:
-        # Return a list of the last one or two node labels that would be the roots of a minimum height tree
+        """Remove leaves from tree exposing new leaves unitl only one or two nodes remain.
+        input tree must be binary otherwise function will hang.
+
+        Output:
+        [int] -- list of node values
+        """
         while len(self.nodes) > 2: self.prune_leaves()
         return sorted([ node.label for node in self.nodes ])
 
 class Solution:
     def findMinHeightTrees(self, node_count: int, edges: [[int]]) -> [int]:
+        """Return nodes that would be used to make this tree have its minimum height.
+
+        Input:
+        :node_count: int     -- number of nodes in tree
+        :edges:      [[int]] -- list of sets of integers that define two nodes relationship
+        
+        Output:
+        [int] -- list of node values
+        """
         return Tree(node_count).add_edges(edges).reduce_tree()
 
 #-------------------------------------------------------------------------------
@@ -77,6 +96,5 @@ class TestSolution(unittest.TestCase):
         n = 6
         edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
         self.assertEqual(Solution().findMinHeightTrees(n, edges), [3, 4])
-        
 
 unittest.main()

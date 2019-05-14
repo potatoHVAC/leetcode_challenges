@@ -15,15 +15,25 @@
 3 Iterate through path index and return the last node with matching value.
 '''
 
+from helper_classes.bst import *
+
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', low: 'TreeNode', high: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, low: TreeNode, high: TreeNode) -> TreeNode:
         lower_path = self.find_path(root, low)
         higher_path = self.find_path(root, high)
         return self.compare_paths(lower_path, higher_path)
 
-    def find_path(self, root: 'TreeNode', target: 'TreeNode') -> ['TreeNode']:
-        # Recursively find the path to target node
-        def _find_path(root: 'TreeNode', target: 'TreeNode', path: ['TreeNode']) -> ['TreeNode']:
+    def find_path(self, root: TreeNode, target: TreeNode) -> [TreeNode]:
+        """Find all nodes in the path to a target node.
+
+        Input:
+        :root:   TreeNode -- root node of tree
+        :target: TreeNode -- find path to this node
+
+        Output: 
+        [TreeNode] -- list of nodes in path to :target: node including :target:
+        """
+        def _find_path(root: TreeNode, target: TreeNode, path: [TreeNode]) -> [TreeNode]:
             path.append(root)
             if root == target:
                 return path
@@ -35,20 +45,26 @@ class Solution:
             
         return _find_path(root, target, [])
 
-    def compare_paths(self, lower_path: ['TreeNode'], higher_path: ['TreeNode']) -> 'TreeNode':
-        # Find the largest index where 'lower_path[index] == higher_path[index]'
-        for i, node in enumerate(lower_path):
-            # If the ith nodes dont match, return the previous node
-            if node != higher_path[i]: return higher_path[i - 1]
-            # If higher_path is out of nodes, return its last node
-            if i + 1 == len(higher_path): return node
-        # If lower_path is out of nodes, return its last node
-        return lower_path[-1]
+    def compare_paths(self, path1: [TreeNode], path2: [TreeNode]) -> TreeNode:
+        """Compare two paths of the same tree to find common ancestor node.
+
+        Input:
+        :path1: [TreeNode] -- list of nodes 
+        :path2: [TreeNode] -- list of nodes
+
+        Output:
+        TreeNode -- the last common node in each path starting from the beginning
+        """
+        for i, node in enumerate(path1):
+            if node != path2[i]:
+                return path2[i - 1]
+            if i + 1 == len(path2):
+                return node
+        return path1[-1]
 
 #-------------------------------------------------------------------------------
 
 import unittest
-from helper_classes.bst import *
 
 class TestSolution(unittest.TestCase):
 

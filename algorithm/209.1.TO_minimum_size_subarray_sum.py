@@ -5,10 +5,19 @@
 
 class Solution:
     def minSubArrayLen(self, target: int, numbers: [int]) -> int:
+        """Find lenght of minimum sub array with the sum less than a target integer.
+
+        Input:
+        :target:  int   -- sub array's sum must be less than :target:
+        :numbers: [int] -- list of integers to find sub array
+
+        Output:
+        int -- length of shortest sub array in :numbers: with sum less than :target:
+        """
         if sum(numbers) < target: return 0
     
         def _min_sub_array_len(target, numbers, min_len = len(numbers), left: int = 0, right: int = 0) -> int:
-            # Find min sub array lenght recursively with left and right pointers.
+            """Find length of minimum sub array."""
             if right > len(numbers): return min_len
             
             if sum(numbers[left:right]) < target:

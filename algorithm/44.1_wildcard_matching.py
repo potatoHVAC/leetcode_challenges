@@ -1,17 +1,25 @@
 # Wildcard Matching
 # https://leetcode.com/problems/wildcard-matching/
-#
-
-
+# Completed 5/13
 
 class Solution:
     def isMatch(self, string: str, pattern: str) -> bool:
+        """Check if pattern is an exact match to string
+
+        Input: 
+        :string:  str -- the string to match
+        :pattern: str -- the pattern to match with string
+        
+        Output:
+        True -- if pattern matches string
+        """
         clean_pattern = self.pattern_cleaner(pattern)
         if string == '' and clean_pattern == '*':
             return True
 
         memoize = {str(len(string)) + '.' + str(len(clean_pattern)): True}
         def _isMatch(string: str, s_pointer: int, pattern: str, p_pointer: int) -> bool:
+            """Solve isMatch with dynamic programing"""
             key = str(s_pointer) + '.' + str(p_pointer)
 
             if key not in memoize:
@@ -38,14 +46,17 @@ class Solution:
         return _isMatch(string, 0, clean_pattern, 0)
 
     def pattern_cleaner(self, pattern: str) -> str:
-        # Return pattern with duplicate '*' removed
+        """Remove duplicate wild cards ('*') from pattern"""
         if len(pattern) == 0:
             return pattern
+        
         clean_pattern = pattern[0]
         for c in pattern[1:]:
             if c == '*' and c == clean_pattern[-1]:
                 pass
-            else: clean_pattern += c
+            else:
+                clean_pattern += c
+            
         return clean_pattern
 
 #-------------------------------------------------------------------------------

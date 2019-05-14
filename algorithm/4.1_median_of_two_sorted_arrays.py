@@ -13,8 +13,15 @@
 
 class Solution:
     def findMedianSortedArrays(self, nums_1: [int], nums_2: [int]) -> float:
-        # Return the median of two lists.
-        # Input lists must be sorted
+        """Return the median value of two lists. The input lists must be sorted.
+
+        Input:
+        :nums_1: [int] -- sorted list of integers
+        :nums_2: [int] -- sorted list of integers
+
+        Output:
+        float -- median of input lists
+        """
         def _findMedianSortedArrays(
                 nums_1: [int],
                 lower_1: int,
@@ -23,6 +30,7 @@ class Solution:
                 lower_2: int,
                 upper_2: int
         ) -> float:
+            """Finds median by recursively removing elements from the ends of both lists"""
             if self.end_recursion(lower_1, upper_1, lower_2, upper_2):
                 return self.median(nums_1[lower_1:upper_1] + nums_2[lower_2:upper_2])
 
@@ -38,7 +46,7 @@ class Solution:
         return _findMedianSortedArrays(nums_1, 0, len(nums_1), nums_2, 0, len(nums_2))
 
     def median(self, nums: [int]) -> float:
-        # Return the median of a sorted list.
+        """Returns the median of a sorted list"""
         half_i = len(nums) // 2
         if len(nums)%2 == 0:
             return (nums[half_i - 1] + nums[half_i]) / 2
@@ -46,7 +54,12 @@ class Solution:
             return float(nums[half_i])
 
     def end_recursion(self, lower_1: int, upper_1: int, lower_2: int, upper_2: int) -> bool:
-        # Return True if either list has been used up or if 2 or fewer numbers remain.
+        """Check if the recursive function should exit.
+
+        Output:
+        True -- if either list is empty (right pointer is now lower than left)
+        True -- if up to two elements remain between the two lists
+        """
         if upper_1 <= lower_1 or upper_2 <= lower_2:
             return True
         elif abs(upper_1 - lower_1) + abs(upper_2 - lower_2) <= 2:

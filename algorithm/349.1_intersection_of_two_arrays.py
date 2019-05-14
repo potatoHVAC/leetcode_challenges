@@ -2,17 +2,27 @@
 # https://leetcode.com/problems/intersection-of-two-arrays/
 # Completed 4/28/19
 
+"""Approach
+1. Create dictionary that holds list elements as key and counts of those elements as values
+2. Create list of all elements in the second list that were stored in the dictionary.
+"""
+
 class Solution:
     def intersection(self, nums1: [int], nums2: [int]) -> [int]:
+        """Find all elements that exist in both input lists.
+
+        Input:
+        :nums1: [int] -- list of elements
+        :nums2: [int] -- list of elements
+
+        Output:
+        [int] -- list of all ementes that exist in :nums1: and :nums2:
+        """
         nums1_dict = self.count_elements_in(nums1)
         return self.compare_array_to_dict(nums2, nums1_dict)
         
     def count_elements_in(self, array: [int]) -> dict:
-        '''
-        Create dictionary from array elements
-          key:   integer
-          value: count of key in array        
-        '''
+        """Create dictionary with elements as keys and element counts as values"""
         numbers = {}
         for num in array:
             if num in numbers: numbers[num] += 1
@@ -21,9 +31,11 @@ class Solution:
         return numbers
 
     def compare_array_to_dict(self, array: [int], dictionary: dict) -> [int]:
-        intersect = set()
+        """Collect all elements from list that exist in dictionary"""
+        intersect = []
         for num in array:
-            if num in dictionary: intersect.add(num)
+            if num in dictionary and num not in intersect:
+                intersect.append(num)
         return list(intersect)
 
 #-------------------------------------------------------------------------------
@@ -72,6 +84,6 @@ class TestSolution(unittest.TestCase):
         array1 = [1, 2, 3, 6, 3, 2, 1, 3, 5]
         array2 = [3, 4, 7, 3, 2, 5]
         answer = [2, 3, 5]
-        self.assertEqual(Solution().intersection(array1, array2), answer)
+        self.assertEqual(sorted(Solution().intersection(array1, array2)), answer)
         
 unittest.main()

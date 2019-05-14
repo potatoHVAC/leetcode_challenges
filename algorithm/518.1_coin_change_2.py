@@ -11,7 +11,7 @@ class Currency:
         self.coins = [ Coin(coin) for coin in coins ]
 
     def change_permutations(self, target: int) -> int:
-        # Return the number of ways to make the target out of this currency
+        """Return the number of ways to make change with the given currency"""
         counting_up = [1] + [ 0 for _ in range(target) ]
         for coin in self.coins:
             for i in range(target + 1):
@@ -24,6 +24,15 @@ class Currency:
 
 class Solution:
     def change(self, target: int, coins: [int]) -> int:
+        """Return the number of ways to make change with the given currency.
+
+        Input:
+        :target: int   -- target value to count the number of ways to make change
+        :coins:  [int] -- list of integers representing the different coin values
+
+        Output:
+        int -- number of ways to make change
+        """
         return Currency(coins).change_permutations(target)
 
 #-------------------------------------------------------------------------------

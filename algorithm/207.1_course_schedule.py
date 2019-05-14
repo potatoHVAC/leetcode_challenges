@@ -16,19 +16,21 @@ class Node:
         self.children = []
 
     def add_prerequisite(self, node: 'Node') -> 'self':
+        """Add prerequisite to node."""
         self.prerequisites.append(node)
         return self
 
     def add_child(self, node: 'Node') -> 'self':
+        """Add child to node."""
         self.children.append(node)
         return self
         
     def is_leaf(self) -> bool:
-        # Return True if node is a leaf
+        """Return True if node is a leaf."""
         return len(self.prerequisites) == 0
 
     def remove_leaf_from_children(self) -> 'self':
-        # Remove pointers to this leaf that is stored on dependent nodes
+        """Remove node references from all parent nodes."""
         for child in self.children:
             child.prerequisites.remove(self)
         return self
@@ -38,7 +40,12 @@ class Tree:
         self.nodes = [ Node(i) for i in range(node_count) ]
 
     def add_edges(self, edges: [[int, int]]) -> 'self':
-        # List of integer pairs used to population node connections
+        """Add all node relationships defined in edges.
+        
+        Input:
+        :edges: [[int, int]] -- list containint sets of integers that represent
+            relationships between nodes
+        """
         for edge in edges:
             current_class = self.nodes[edge[0]]
             prerequisit_class = self.nodes[edge[1]]
@@ -48,12 +55,17 @@ class Tree:
         return self
 
     def remove_leaf_from_tree(self, leaf: Node) -> 'self':
+        """Remove leaf from tree."""
         self.nodes.remove(leaf)
         return self
             
     def prune_leaves(self) -> bool:
-        # Remove all leaves and their references from tree.
-        # Return True if leaves were removed and False otherwise.
+        """Find all leaves and remove them from tree.
+
+        Output:
+        True  -- if leaves are removed
+        False -- if no leaves in tree
+        """
         leaves = [ node for node in self.nodes if node.is_leaf() ]
         if len(leaves) == 0: return False
         
@@ -63,7 +75,12 @@ class Tree:
         return True
 
     def reduce_tree(self) -> [int]:
-        # Return a list of cyclical nodes if they exist
+        """Remove leaves from tree until tree is empty or no more leaves exist.
+
+        Output:
+        True  -- if tree is empty
+        False -- if tree contains cycles
+        """
         while self.prune_leaves(): pass
         return len(self.nodes) == 0
 
