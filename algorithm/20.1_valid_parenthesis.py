@@ -2,6 +2,15 @@
 # https://leetcode.com/problems/valid-parentheses/
 # Completed 5/12/19
 
+"""Approach
+1. Use regex to replace all () [] {} sets with empty strings and save to 
+   a new variable.
+2. If new length == old length then check completion.
+  2.1 Return True if new length == 0
+  2.2 Return False if new length > 0
+3. Repeat steps 1 and 2 until done.
+"""
+
 import re
 
 class Solution:
@@ -14,8 +23,6 @@ class Solution:
         Output:
         True -- if sequence is valid
         """
-        # Return True if sequence is empty
-        #        False if nothing removed from sequence
         new_sequence = re.sub('({}|\(\)|\[\])', '', sequence)
         if len(sequence) == len(new_sequence):
             return len(sequence) == 0

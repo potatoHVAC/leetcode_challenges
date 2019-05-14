@@ -5,7 +5,7 @@
 ''' Approach
 1. Create a doubly linked graph.
 2. Remove leaf nodes from tree and delete their references in parent nodes.
-3. Repeat 2 untill tree is empty or no more leaves exist.
+3. Repeat 2 until tree is empty or no more leaves exist.
 4. Return True if tree is empty.
 '''
 

@@ -8,6 +8,17 @@
 #         self.val = x
 #         self.next = None
 
+"""Approach
+1. Create two pointers at the root of the list
+2. Send one pointer down n + 1 nodes of the list.
+  Note: this will fail if n indicates the root node.
+3. Move both pointers down the list at the same time until the forward pointer
+   reaches the end of the list.
+4. The previous pointer now indicates one node before the one we want to remove.
+   Set the previous pointer's next value to two nodes ahead.
+5. Return head of list.
+"""
+
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         """Remove the node that is n places from the end of linked list.
@@ -26,6 +37,7 @@ class Solution:
             for _ in range(n + 1):
                 last_node = last_node.next
         except:
+            # n points at the first node of the list
             return head.next
 
         while last_node:
