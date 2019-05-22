@@ -150,7 +150,7 @@ class Board:
 #   Main Driver Function for Leetcode Input
 #-------------------------------------------------------------------------------
 class Solution:
-    def cherryPickup(self, grid: List[List[int]]) -> int:    
+    def cherryPickup(self, grid: [[int]]) -> int:    
         """Main function for solving Leetcode Input
 
         Input:
