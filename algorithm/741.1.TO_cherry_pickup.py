@@ -12,7 +12,12 @@
 """
 1. DFS 
 2. Check if current tile is cherry or wall
- 2.1 
+ 2.1 Return path if last found and bottom left tile was touched
+ 2.2 If wall or out of bounds, return empty path
+ 2.3 Find max of two future paths ([lef, down] for going in and [up, right] for 
+      returning).
+ 2.4 If cherry, add to max future path and return path.
+3. Return length of path
 """
 
 #-------------------------------------------------------------------------------
