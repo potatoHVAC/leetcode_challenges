@@ -29,7 +29,6 @@ class LongestPalindrome:
         
     def is_palindrome(self, left: int, right: int) -> bool:
         """Return True if sub_string is a palindrome."""
-        print(self.string, left, right)
         if self.string[left] == self.string[right - 1]:
             mid = (left + right) // 2
             r_mid = mid + (left + right)%2
@@ -55,7 +54,6 @@ class LongestPalindrome:
     
     def solve(self) -> str:
         """Return the longest palindrome in the string."""
-        print("\n\n")
 
         def _solve(left: int, right: int):
             if left < 0:
