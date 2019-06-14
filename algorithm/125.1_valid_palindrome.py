@@ -1,6 +1,12 @@
-# Valid Palindrome
+#-------------------------------------------------------------------------------
+#    Valid Palindrome
+#-------------------------------------------------------------------------------
+# By Daniel Speer
 # https://leetcode.com/problems/valid-palindrome/
 # Completed 4/28/19
+#-------------------------------------------------------------------------------
+#    Approach   
+#-------------------------------------------------------------------------------
 
 ''' Approach
 1 Clean string with regex
@@ -12,6 +18,10 @@
     * Note steps 2 and 3 will ignore the middle number if string length is odd
 4 Return first half == reversed second half
 '''
+
+#-------------------------------------------------------------------------------
+#    Solution   
+#-------------------------------------------------------------------------------
 
 import re
 
@@ -42,6 +52,8 @@ class Solution:
         """Return reversed second half of input string"""
         return input_string[- (len(input_string) // 2) :][::-1]
 
+#-------------------------------------------------------------------------------
+#    Unit Test
 #-------------------------------------------------------------------------------
 
 import unittest
